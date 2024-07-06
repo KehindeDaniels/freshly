@@ -1,17 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaHeart } from "react-icons/fa";
-import { Link } from "react-router-dom"; // Import Link here for usage inside the component
+import { Link } from "react-router-dom";
 
 const ProductCard = ({ product, to }) => {
+  // State to manage visibility of the Add to Cart button on mobile
+  const [showAddToCart, setShowAddToCart] = useState(false);
+
+  // Toggle the Add to Cart button visibility
+  const toggleAddToCart = () => {
+    setShowAddToCart(!showAddToCart);
+  };
+
   return (
     <div className="p-2 rounded-lg bg-white shadow-md overflow-hidden relative group hover:bg-gray-50 transition-colors">
-      <div className="image relative flex items-center justify-center bg-[#F6F6F6]">
+      <div
+        className="image relative flex items-center justify-center bg-[#F6F6F6]"
+        onClick={toggleAddToCart} // Toggle on image click
+      >
         <img
           src={product.image}
           alt={product.name}
           className="w-1/2 h-48 object-cover"
         />
-        <div className="absolute inset-0 bg-green-950 opacity-70 p-4 hidden group-hover:flex group-hover:justify-center group-hover:items-center">
+        {/* Toggle visibility based on showAddToCart state or hover */}
+        <div
+          className={`absolute inset-0 bg-green-950 opacity-70 p-4 ${
+            showAddToCart ? "flex" : "hidden"
+          } group-hover:flex justify-center items-center`}
+        >
           <button className="bg-transparent border text-white py-2 px-2 rounded-full">
             Add to Cart
           </button>
