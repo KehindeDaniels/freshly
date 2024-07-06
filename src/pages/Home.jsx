@@ -5,9 +5,13 @@ import products from "../../data";
 
 const Home = () => {
   return (
-    <div>
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
       {products.map((product) => (
-        <Link key={product.id} to={`/product/${product.name}`}>
+        <Link
+          key={product.id}
+          to={`/product/${product.name}`}
+          className="no-underline text-black"
+        >
           <ProductCard product={product} />
         </Link>
       ))}
