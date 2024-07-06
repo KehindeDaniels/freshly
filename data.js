@@ -7,6 +7,7 @@ const products = [
     category: "Vegetables",
     price: 900,
     image: "/assets/lettuce.png",
+    pricePer: "per Bundle", // Added price per unit
   },
   {
     id: 2,
@@ -16,6 +17,7 @@ const products = [
     category: "Vegetables",
     price: 1200,
     image: "/assets/tomatoes.png",
+    pricePer: "per Kilogram", // Added price per unit
   },
   {
     id: 3,
@@ -25,6 +27,7 @@ const products = [
     category: "Vegetables",
     price: 900,
     image: "/assets/onions.png",
+    pricePer: "per Kilogram", // Added price per unit
   },
   {
     id: 4,
@@ -34,6 +37,7 @@ const products = [
     category: "Fruits",
     price: 400,
     image: "/assets/lemon.png",
+    pricePer: "per Whole", // Added price per unit
   },
   {
     id: 5,
@@ -43,6 +47,7 @@ const products = [
     category: "Vegetables",
     price: 600,
     image: "/assets/scotch.png",
+    pricePer: "per Kilogram", // Added price per unit
   },
   {
     id: 6,
@@ -52,6 +57,7 @@ const products = [
     category: "Vegetables",
     price: 900,
     image: "/assets/Egg-plant.png",
+    pricePer: "per Whole", // Added price per unit
   },
   {
     id: 7,
@@ -61,6 +67,7 @@ const products = [
     category: "Fruits",
     price: 1000,
     image: "/assets/Banana.png",
+    pricePer: "per Bunch", // Added price per unit
   },
   {
     id: 8,
@@ -70,6 +77,7 @@ const products = [
     category: "Fruits",
     price: 1900,
     image: "/assets/Pineapple.png",
+    pricePer: "per Whole", // Added price per unit
   },
 ];
 
