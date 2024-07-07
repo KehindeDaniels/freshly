@@ -1,12 +1,15 @@
+// NavBar.jsx
 import React, { useState } from "react";
-import logo from "/assets/logo.png";
 import { FaSearch, FaShoppingCart } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import { useCart } from "../CartContext"; // Ensure the path is correct based on your structure
+import logo from "/assets/logo.png";
 
 const NavBar = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const { totalItems } = useCart(); // Use totalItems from the cart context
 
-  // Toggle search expand and collapse on mobile
   const toggleSearch = () => {
     setIsSearchOpen(!isSearchOpen);
   };
@@ -32,12 +35,16 @@ const NavBar = () => {
           />
         </div>
       </div>
-      <div className="cart relative">
-        <FaShoppingCart className="w-8 h-8" />
-        <div className="cartNumber absolute -top-1 right-0 flex justify-center items-center bg-green-400 text-white w-6 h-6 rounded-full">
-          2
+      <Link to="/cart">
+        <div className="cart relative">
+          <FaShoppingCart className="w-8 h-8" />
+          {totalItems > 0 && (
+            <div className="cartNumber absolute -top-1 right-0 flex justify-center items-center bg-green-400 text-white w-6 h-6 rounded-full">
+              {totalItems}
+            </div>
+          )}
         </div>
-      </div>
+      </Link>
     </header>
   );
 };
