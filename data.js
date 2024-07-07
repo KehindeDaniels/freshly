@@ -3,81 +3,97 @@ const products = [
     id: 1,
     name: "Lettuce Leaf",
     description:
-      "Fresh lettuce leaves, perfect for salads and garnishes, packed with nutrients.",
+      "Discover the unparalleled freshness and quality of our farm-fresh lettuce, harvested daily from our local fields. Our lettuce is nurtured with care, ensuring that each leaf is packed with flavor and nutrients.",
     category: "Vegetables",
     price: 900,
     image: "/assets/lettuce.png",
-    pricePer: "per Bundle", // Added price per unit
+    pricePer: "per Bundle",
+    rating: 530,
+    stars: 5,
   },
   {
     id: 2,
     name: "Tomatoes",
     description:
-      "Ripe, juicy tomatoes ideal for cooking or fresh eating, rich in vitamins and antioxidants.",
+      "Experience the rich, robust flavor of our sun-ripened tomatoes. Perfect for salads, sauces, and slicing, our tomatoes are hand-picked for their vibrant color and firmness.",
     category: "Vegetables",
     price: 1200,
     image: "/assets/tomatoes.png",
-    pricePer: "per Kilogram", // Added price per unit
+    pricePer: "per Kilogram",
+    rating: 410,
+    stars: 4,
   },
   {
     id: 3,
     name: "Onions",
     description:
-      "Versatile onions, essential for flavor in a variety of dishes, available per kilogram.",
+      "Add depth and intensity to any dish with our premium onions. Grown in fertile soil, these onions provide a strong, yet sweet flavor when cooked.",
     category: "Vegetables",
     price: 900,
     image: "/assets/onions.png",
-    pricePer: "per Kilogram", // Added price per unit
+    pricePer: "per Kilogram",
+    rating: 325,
+    stars: 4,
   },
   {
     id: 4,
     name: "Lemon",
     description:
-      "Bright and zesty lemons, perfect for enhancing drinks and dishes with a citrusy flavor.",
+      "Our zesty lemons are bursting with tangy flavor and a vibrant, juicy freshness that enhances beverages, marinades, and dressings.",
     category: "Fruits",
     price: 400,
     image: "/assets/lemon.png",
-    pricePer: "per Whole", // Added price per unit
+    pricePer: "per Whole",
+    rating: 270,
+    stars: 4,
   },
   {
     id: 5,
     name: "Scotch Bonnets",
     description:
-      "Spicy Scotch Bonnet peppers to add heat and flavor to your meals, sold per kilogram.",
+      "Turn up the heat with our fiery Scotch Bonnet peppers. Ideal for those who dare to explore spicy cuisines, these peppers are a staple in Caribbean dishes.",
     category: "Vegetables",
     price: 600,
     image: "/assets/scotch.png",
-    pricePer: "per Kilogram", // Added price per unit
+    pricePer: "per Kilogram",
+    rating: 200,
+    stars: 5,
   },
   {
     id: 6,
     name: "Eggplant",
     description:
-      "Smooth and versatile eggplants, great for grilling, baking, or frying.",
+      "Our eggplants boast a glossy exterior and a spongy texture that absorbs flavors beautifully, making them perfect for your culinary experiments.",
     category: "Vegetables",
     price: 900,
     image: "/assets/Egg-plant.png",
-    pricePer: "per Whole", // Added price per unit
+    pricePer: "per Whole",
+    rating: 150,
+    stars: 3,
   },
   {
     id: 7,
     name: "Bananas",
     description:
-      "Sweet and creamy bananas, perfect for snacking or baking, available per bunch.",
+      "Enjoy the smooth, creamy texture and natural sweetness of our bananas. Grown in tropical climates, they are an excellent source of energy and potassium.",
     category: "Fruits",
     price: 1000,
     image: "/assets/Banana.png",
-    pricePer: "per Bunch", // Added price per unit
+    pricePer: "per Bunch",
+    rating: 480,
+    stars: 4,
   },
   {
     id: 8,
     name: "Pineapple",
     description:
-      "Fresh pineapple, juicy and packed with vitamins, ideal for a healthy snack.",
+      "Our pineapples are picked at peak ripeness, ensuring each bite is infused with an intense sweetness that's second to none.",
     category: "Fruits",
     price: 1900,
     image: "/assets/Pineapple.png",
-    pricePer: "per Whole", // Added price per unit
+    pricePer: "per Whole",
+    rating: 390,
+    stars: 4,
   },
 ];
 

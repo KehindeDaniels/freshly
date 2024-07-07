@@ -26,16 +26,19 @@ function cartReducer(state, action) {
       };
     case "REMOVE_ITEM":
       const newItems = { ...state.items };
-      if (newItems[action.id].quantity > 1) {
-        newItems[action.id].quantity -= 1;
-      } else {
-        delete newItems[action.id];
+      // Check if the item exists in the cart before attempting to delete it
+      if (newItems[action.id]) {
+        // Subtract the quantity of this item from the total items count before deleting it
+        const updatedTotalItems =
+          state.totalItems - newItems[action.id].quantity;
+        delete newItems[action.id]; // Deletes the item entirely
+        return {
+          ...state,
+          items: newItems,
+          totalItems: updatedTotalItems,
+        };
       }
-      return {
-        ...state,
-        items: newItems,
-        totalItems: state.totalItems - 1,
-      };
+      return state; // Return the existing state if the item is not found
     case "CLEAR_CART":
       return initialState;
     default:
