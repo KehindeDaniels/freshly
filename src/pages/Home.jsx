@@ -1,7 +1,7 @@
+// Home.jsx
 import React from "react";
 import ProductCard from "../components/ProductCard";
-import products from "../../data"; // Ensure this path is correct
-
+import products from "../../data";
 const Home = () => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
