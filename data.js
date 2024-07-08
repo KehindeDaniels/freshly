@@ -1,17 +1,5 @@
 const products = [
   {
-    id: 1,
-    name: "Lettuce Leaf",
-    description:
-      "Discover the unparalleled freshness and quality of our farm-fresh lettuce, harvested daily from our local fields. Our lettuce is nurtured with care, ensuring that each leaf is packed with flavor and nutrients.",
-    category: "Veggies",
-    price: 900,
-    image: "/assets/lettuce.png",
-    pricePer: "per Bundle",
-    rating: 530,
-    stars: 5,
-  },
-  {
     id: 2,
     name: "Tomatoes",
     description:
@@ -59,6 +47,7 @@ const products = [
     rating: 200,
     stars: 5,
   },
+
   {
     id: 6,
     name: "Eggplant",
@@ -94,6 +83,18 @@ const products = [
     pricePer: "per Whole",
     rating: 390,
     stars: 4,
+  },
+  {
+    id: 1,
+    name: "Lettuce Leaf",
+    description:
+      "Discover the unparalleled freshness and quality of our farm-fresh lettuce, harvested daily from our local fields. Our lettuce is nurtured with care, ensuring that each leaf is packed with flavor and nutrients.",
+    category: "Veggies",
+    price: 900,
+    image: "/assets/lettuce.png",
+    pricePer: "per Bundle",
+    rating: 530,
+    stars: 5,
   },
 ];
 
