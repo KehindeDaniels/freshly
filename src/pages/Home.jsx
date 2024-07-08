@@ -38,7 +38,7 @@ const Home = () => {
   );
 
   return (
-    <div className="mt-16  sm:px-4">
+    <div className="mt-8 md:mt-16  sm:px-4">
       <div className=" relative flex justify-between items-start px-4 lg:flex-row">
         <h2 className="font-bold text-xl mb-4 lg:mb-0">Fresh Produce</h2>
         <div className="lg:hidden ">
