@@ -49,43 +49,21 @@ const AboutProduct = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <Link
-        to="/"
-        className="text-blue-500 hover:text-blue-700 flex items-center mb-4"
-      >
+    <div className="contain mt-8 ">
+      <Link to="/" className=" hover:text-green-700 flex items-center mb-4">
         &#8592; Back
       </Link>
-      <div className="flex flex-col items-center md:flex-row gap-8">
-        <div className="flex-1 max-w-96">
-          <div className="rounded-lg shadow-lg bg-green-50">
-            <img
-              src={product.image}
-              alt={product.name}
-              className="max-w-52 mx-auto object-center"
-            />
-          </div>
-
-          <div className="flex justify-center gap-4 mt-4">
-            <img
-              src={product.image}
-              alt="Small"
-              className="w-20 h-20 rounded-lg cursor-pointer hover:border hover:border-orange-300 p-2"
-            />
-            <img
-              src={product.image}
-              alt="Medium"
-              className="w-24 h-24 rounded-lg cursor-pointer hover:border hover:border-orange-300 p-2"
-            />
-            <img
-              src={product.image}
-              alt="Large"
-              className="w-28 h-28 rounded-lg cursor-pointer hover:border hover:border-orange-300 p-2"
-            />
-          </div>
+      <div className="flex flex-col items-center md:flex-row gap-8 w-full">
+        <div className="flex-1 rounded-lg bg-green-50 py-8">
+          <img
+            src={product.image}
+            alt={product.name}
+            className="w-1/3  mx-auto object-center"
+          />
         </div>
-        <div className="description flex-1 flex flex-col justify-center items-center text-center md:text-left md:items-start">
-          <h1 className="text-3xl font-bold">
+
+        <div className="description md:pr-16 flex-1 flex flex-col justify-center items-center text-center md:text-left md:items-start">
+          <h1 className="text-3xl font-bold md:flex md:justify-between md:items-center md:w-full">
             {product.name}{" "}
             <span className="text-green-600 text-xl">₦{product.price}</span>
           </h1>
@@ -97,18 +75,12 @@ const AboutProduct = () => {
           </div>
           <div className="mt-4">
             <label className="font-bold">Quantity</label>
-            <div className="flex items-center justify-between w-32 border rounded overflow-hidden mt-1">
-              <button
-                onClick={handleDecrement}
-                className="p-2 bg-gray-200 hover:bg-gray-300"
-              >
+            <div className="flex items-center justify-between w-36 border rounded-lg overflow-hidden  mt-1">
+              <button onClick={handleDecrement} className="p-2">
                 -
               </button>
               <div className="p-2">{quantity}</div>
-              <button
-                onClick={handleIncrement}
-                className="p-2 bg-gray-200 hover:bg-gray-300"
-              >
+              <button onClick={handleIncrement} className="p-2">
                 +
               </button>
             </div>
@@ -119,7 +91,7 @@ const AboutProduct = () => {
             {product.description}
           </p>
           <div className="mt-4 flex gap-4">
-            <button className="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded">
+            <button className="bg-green-600 hover:bg-green-700 text-white py-2 px-8 rounded">
               Buy Now
             </button>
             <button

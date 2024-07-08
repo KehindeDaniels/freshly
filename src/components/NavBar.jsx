@@ -34,7 +34,7 @@ const NavBar = () => {
   }, []);
 
   return (
-    <header className="flex items-center justify-between px-4 py-4 bg-white border-b-[1px] overflow-hidden">
+    <header className="flex items-center justify-between px-4 py-4 bg-white border-b-[1px] border-gray-300 overflow-hidden">
       <Link to="/" className="flex items-start">
         <img src={logo} alt="Freshly Logo" className="w-20" />
       </Link>
