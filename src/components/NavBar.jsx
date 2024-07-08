@@ -15,7 +15,7 @@ const NavBar = () => {
   };
 
   return (
-    <header className="flex items-center justify-between px-4 py-2 bg-white border-b-[1px]">
+    <header className="flex items-center justify-between px-4 py-2 bg-white border-b-[1px] overflow-hidden">
       <Link to="/" className="flex items-center">
         <img src={logo} alt="Freshly Logo" className="w-20" />
       </Link>
