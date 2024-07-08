@@ -100,7 +100,7 @@ const Checkout = () => {
           </button>
           {showModal && (
             <div className="absolute top-0 left-0 right-0 bottom-0 bg-black bg-opacity-50 flex justify-center items-center">
-              <div className="bg-white py-8 px-16 rounded text-center">
+              <div className="bg-white p-12 rounded text-center">
                 <img
                   src="/assets/Check.png"
                   alt="check"
