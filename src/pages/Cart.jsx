@@ -90,7 +90,7 @@ const Cart = () => {
             </div>
           ))}
         </div>
-        <div className="w-full lg:w-80 p-4 bg-white shadow-md rounded-lg">
+        <div className="w-full lg:w-80 p-4 bg-gray-100 shadow-md rounded-lg">
           <h4 className="text-xl font-bold">Order Summary</h4>
           <div className="my-2 flex justify-between">
             <span>Subtotal</span>
