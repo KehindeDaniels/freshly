@@ -1,9 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { CartContext } from "../CartContext";
 
 const Checkout = () => {
   const { items, clearCart } = useContext(CartContext);
+  const [showModal, setShowModal] = useState(false); // State to control modal visibility
+
   const subtotal = Object.values(items).reduce(
     (acc, item) => acc + item.quantity * item.price,
     0
@@ -11,6 +13,11 @@ const Checkout = () => {
   const delivery = 500;
   const VAT = 0; // Adjust VAT as per your local tax laws if necessary
   const total = subtotal + delivery + VAT;
+
+  const handlePayment = () => {
+    setShowModal(true); // Show the modal
+    clearCart(); // Optionally clear the cart
+  };
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -86,11 +93,32 @@ const Checkout = () => {
             <span>₦{total}</span>
           </div>
           <button
-            onClick={clearCart}
+            onClick={handlePayment}
             className="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded mt-4 w-full"
           >
             Pay ₦{total}
           </button>
+          {showModal && (
+            <div className="absolute top-0 left-0 right-0 bottom-0 bg-black bg-opacity-50 flex justify-center items-center">
+              <div className="bg-white py-8 px-16 rounded text-center">
+                <img
+                  src="/assets/Check.png"
+                  alt="check"
+                  className="w-10 mx-auto"
+                />
+                <h2 className="font-bold mt-8">Order Successful!</h2>
+                <p className="mb-8 text-gray-400">
+                  Your order should be delivered to you within 2-3 days!
+                </p>
+                <Link
+                  to="/"
+                  className="bg-gray-800 text-white py-2 px-4 rounded-lg mt-4"
+                >
+                  Back to Home
+                </Link>
+              </div>
+            </div>
+          )}
           <p className="text-xs text-center mt-4">
             *By clicking this button, you agree to the Terms and Conditions of
             Freshly Inc.
