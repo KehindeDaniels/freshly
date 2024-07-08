@@ -6,10 +6,10 @@ const Home = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   const Allfilters = [
-    { name: "All", src: "../../public/assets/all.png" },
-    { name: "Fruits", src: "../../public/assets/fruits.png" },
-    { name: "Veggies", src: "../../public/assets/vegetables.png" },
-    { name: "Grain", src: "../../public/assets/grain.png" },
+    { name: "All", src: "/assets/all.png" },
+    { name: "Fruits", src: "/assets/fruits.png" },
+    { name: "Veggies", src: "/assets/vegetables.png" },
+    { name: "Grain", src: "/assets/grain.png" },
   ];
 
   const handleFilterClick = (category) => {
