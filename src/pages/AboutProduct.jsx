@@ -70,17 +70,17 @@ const AboutProduct = () => {
             <img
               src={product.image}
               alt="Small"
-              className="w-20 h-20 rounded-lg cursor-pointer"
+              className="w-20 h-20 rounded-lg cursor-pointer hover:border hover:border-orange-300 p-2"
             />
             <img
               src={product.image}
               alt="Medium"
-              className="w-24 h-24 rounded-lg cursor-pointer"
+              className="w-24 h-24 rounded-lg cursor-pointer hover:border hover:border-orange-300 p-2"
             />
             <img
               src={product.image}
               alt="Large"
-              className="w-28 h-28 rounded-lg cursor-pointer"
+              className="w-28 h-28 rounded-lg cursor-pointer hover:border hover:border-orange-300 p-2"
             />
           </div>
         </div>
