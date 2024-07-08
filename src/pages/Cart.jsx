@@ -9,7 +9,7 @@ const Cart = () => {
     0
   );
   const delivery = 500; // Fixed delivery cost
-  const VAT = 0; // VAT is not applied in this example, adjust as necessary
+  const VAT = 0; // VAT not applied in this example, adjust as necessary
   const grossTotal = subtotal + delivery + VAT; // Calculating Gross Total
 
   if (Object.keys(items).length === 0) {
@@ -31,90 +31,82 @@ const Cart = () => {
   }
 
   return (
-    <>
+    <div className="container w-full p-8 mx-auto">
       <Link
         to="/"
-        className="bg-gray-200 text-black py-2 px-4 rounded hover:bg-gray-300 transition-colors m-4"
+        className="  rounded hover:bg-gray-300 transition-colors mb-4"
       >
-        Back to Shop
+        &#8592; Back
       </Link>
-      <div className="flex flex-col md:flex-row justify-between p-4">
-        <div className="flex-1">
+      <div className="flex flex-col lg:flex-row justify-between gap-6 mt-8 ">
+        <div className="flex-1 ">
+          <div className="font-bold text-lg mb-2">Your Cart</div>
           {Object.values(items).map((item) => (
             <div
               key={item.id}
-              className="flex relative flex-col md:flex-row justify-between items-center mb-4 gap-4 p-4 shadow rounded-lg"
+              className="relative flex items-center gap-4 mb-4  p-4 border-b-2 border-gray-200"
             >
-              <img
-                src={item.image}
-                alt={item.name}
-                className="w-32 h-32 object-cover rounded"
-              />
-              <div className="flex-1">
-                <h5 className="text-xl font-bold">{item.name}</h5>
-                <p className="text-sm">₦{item.price}</p>
+              <input type="checkbox" className="form-checkbox h-5 w-5" />
+              <div className="bg-[#E6FDE0] w-32 h-32 p-2">
+                <img src={item.image} alt={item.name} className=" rounded-lg" />
               </div>
-              <div className="flex items-center">
+              <div className="text-lg flex flex-col flex-grow">
+                <span className="font-bold">{item.name}</span>
+                <span className="text-[#1DA934] font-bold">₦{item.price}</span>
+              </div>
+              <div className="flex items-center justify-between px-2 rounded-lg border border-gray-400 w-52">
                 <button
                   onClick={() => decrementItem(item.id)}
-                  className="bg-gray-200 hover:bg-gray-300 text-black font-bold py-1 px-3 rounded"
+                  className=" p-2 "
                 >
                   -
                 </button>
                 <span className="px-4">{item.quantity}</span>
-                <button
-                  onClick={() => addItem(item)}
-                  className="bg-gray-200 hover:bg-gray-300 text-black font-bold py-1 px-3 rounded"
-                >
+                <button onClick={() => addItem(item)} className=" p-2 ">
                   +
                 </button>
               </div>
               <button
                 onClick={() => removeItem(item.id)}
-                className="absolute top-0 right-4 text-xl hover:text-red-700"
+                className=" absolute top-0 right-0"
               >
-                X
+                ✕
               </button>
             </div>
           ))}
         </div>
-        <div className="w-80 p-4 ml-4 bg-white shadow rounded-lg">
-          <h4 className="text-xl font-bold mb-4">Order Summary</h4>
-          <div className="flex justify-between mb-2">
-            <p>Subtotal</p>
-            <p>₦{subtotal}</p>
+        <div className="w-full lg:w-80 p-4 bg-white shadow-md rounded-lg">
+          <h4 className="text-xl font-bold">Order Summary</h4>
+          <div className="my-2 flex justify-between">
+            <span>Subtotal</span>
+            <span>₦{subtotal}</span>
           </div>
-          <div className="flex justify-between mb-2">
-            <p>Delivery</p>
-            <p>₦{delivery}</p>
+          <div className="my-2 flex justify-between">
+            <span>Delivery</span>
+            <span>₦{delivery}</span>
           </div>
-          <div className="flex justify-between mb-2">
-            <p>VAT</p>
-            <p>₦{VAT}</p>
+          <div className="my-2 flex justify-between">
+            <span>VAT</span>
+            <span>₦{VAT}</span>
           </div>
-          <div className="flex justify-between font-bold mb-2">
-            <p>Gross Total</p>
-            <p>₦{grossTotal}</p>
+          <div className="my-4 border-t pt-4 flex justify-between font-bold">
+            <span>Total</span>
+            <span>₦{grossTotal}</span>
           </div>
-          <hr className="my-2" />
-          <div className="flex justify-between font-bold">
-            <p>Total</p>
-            <p>₦{grossTotal}</p>
-          </div>
+          <Link to="/checkout">
+            <button className="bg-[#3F7039] hover:bg-green-700 text-white py-2 px-4 rounded w-full">
+              Checkout Now
+            </button>
+          </Link>
           <button
             onClick={clearCart}
-            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-4 w-full"
+            className=" text-red-700 font-bold py-2 px-4 rounded w-full mt-2"
           >
             Clear Cart
           </button>
-          <Link to="/checkout">
-            <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-4 w-full">
-              Proceed to Checkout
-            </button>
-          </Link>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

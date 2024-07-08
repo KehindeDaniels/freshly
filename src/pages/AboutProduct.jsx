@@ -75,7 +75,7 @@ const AboutProduct = () => {
           </div>
           <div className="mt-4">
             <label className="font-bold">Quantity</label>
-            <div className="flex items-center justify-between w-36 border rounded-lg overflow-hidden  mt-1">
+            <div className="flex items-center justify-between w-36 border rounded-lg   mt-1">
               <button onClick={handleDecrement} className="p-2">
                 -
               </button>
@@ -91,6 +91,7 @@ const AboutProduct = () => {
             {product.description}
           </p>
           <div className="mt-4 flex gap-4">
+            <Link></Link>
             <button className="bg-green-600 hover:bg-green-700 text-white py-2 px-8 rounded">
               Buy Now
             </button>
