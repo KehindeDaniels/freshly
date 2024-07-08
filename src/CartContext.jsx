@@ -18,27 +18,38 @@ function cartReducer(state, action) {
       const updatedItem = existingItem
         ? { ...existingItem, quantity: existingItem.quantity + 1 }
         : { ...newItem, quantity: 1 };
-      const updatedItems = { ...state.items, [newItem.id]: updatedItem };
       return {
         ...state,
-        items: updatedItems,
+        items: { ...state.items, [newItem.id]: updatedItem },
         totalItems: state.totalItems + 1,
       };
-    case "REMOVE_ITEM":
-      const newItems = { ...state.items };
-      // Check if the item exists in the cart before attempting to delete it
-      if (newItems[action.id]) {
-        // Subtract the quantity of this item from the total items count before deleting it
-        const updatedTotalItems =
-          state.totalItems - newItems[action.id].quantity;
-        delete newItems[action.id]; // Deletes the item entirely
+    case "DECREMENT_ITEM":
+      if (state.items[action.id] && state.items[action.id].quantity > 1) {
+        const decrementedItem = {
+          ...state.items[action.id],
+          quantity: state.items[action.id].quantity - 1,
+        };
         return {
           ...state,
-          items: newItems,
+          items: { ...state.items, [action.id]: decrementedItem },
+          totalItems: state.totalItems - 1,
+        };
+      } else {
+        return state; // If item quantity is 1 or less, do nothing
+      }
+    case "REMOVE_ITEM":
+      const remainingItems = { ...state.items };
+      if (remainingItems[action.id]) {
+        const updatedTotalItems =
+          state.totalItems - remainingItems[action.id].quantity;
+        delete remainingItems[action.id];
+        return {
+          ...state,
+          items: remainingItems,
           totalItems: updatedTotalItems,
         };
       }
-      return state; // Return the existing state if the item is not found
+      return state;
     case "CLEAR_CART":
       return initialState;
     default:
@@ -52,11 +63,14 @@ export const CartProvider = ({ children }) => {
 
   // Helper functions
   const addItem = (item) => dispatch({ type: "ADD_ITEM", payload: item });
+  const decrementItem = (id) => dispatch({ type: "DECREMENT_ITEM", id });
   const removeItem = (id) => dispatch({ type: "REMOVE_ITEM", id });
   const clearCart = () => dispatch({ type: "CLEAR_CART" });
 
   return (
-    <CartContext.Provider value={{ ...state, addItem, removeItem, clearCart }}>
+    <CartContext.Provider
+      value={{ ...state, addItem, decrementItem, removeItem, clearCart }}
+    >
       {children}
     </CartContext.Provider>
   );

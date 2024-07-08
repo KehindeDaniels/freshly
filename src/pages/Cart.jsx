@@ -3,7 +3,7 @@ import { useCart } from "../CartContext";
 import { Link } from "react-router-dom";
 
 const Cart = () => {
-  const { items, addItem, removeItem, clearCart } = useCart();
+  const { items, addItem, decrementItem, removeItem, clearCart } = useCart();
 
   if (Object.keys(items).length === 0) {
     return (
@@ -50,7 +50,7 @@ const Cart = () => {
             <div className="text-lg md:text-xl font-bold">{item.name}</div>
             <div className="flex items-center">
               <button
-                onClick={() => removeItem(item.id)}
+                onClick={() => decrementItem(item.id)}
                 className="bg-red-300 hover:bg-red-400 text-white font-bold py-1 px-3 rounded"
               >
                 -
