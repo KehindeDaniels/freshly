@@ -25,7 +25,7 @@ const NavBar = () => {
         }`}
       >
         <FaSearch
-          className="text-green-500 mr-2 cursor-pointer"
+          className="text-gray-400 mr-2 cursor-pointer"
           onClick={toggleSearch}
         />
         <input
