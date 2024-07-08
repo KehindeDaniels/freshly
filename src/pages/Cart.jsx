@@ -47,24 +47,39 @@ const Cart = () => {
               className="relative flex items-center gap-4 mb-4  p-4 border-b-2 border-gray-200"
             >
               <input type="checkbox" className="form-checkbox h-5 w-5" />
-              <div className="bg-[#E6FDE0] w-32 h-32 p-2">
-                <img src={item.image} alt={item.name} className=" rounded-lg" />
-              </div>
-              <div className="text-lg flex flex-col flex-grow">
-                <span className="font-bold">{item.name}</span>
-                <span className="text-[#1DA934] font-bold">₦{item.price}</span>
-              </div>
-              <div className="flex items-center justify-between px-2 rounded-lg border border-gray-400 w-52">
-                <button
-                  onClick={() => decrementItem(item.id)}
-                  className=" p-2 "
-                >
-                  -
-                </button>
-                <span className="px-4">{item.quantity}</span>
-                <button onClick={() => addItem(item)} className=" p-2 ">
-                  +
-                </button>
+              {/* image count */}
+              <div className="flex gap-6">
+                {/* image */}
+                <div className="flex-1 bg-[#E6FDE0] w-32 h-32 p-2">
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    className=" rounded-lg"
+                  />
+                </div>
+                {/* price count */}
+                <div className="flex-1  flex items-start sm:gap-32 flex-col w-full sm:flex-row ">
+                  {/* name price */}
+                  <div className="text-lg flex flex-col ">
+                    <span className="font-bold">{item.name}</span>
+                    <span className="text-[#1DA934] font-bold">
+                      ₦{item.price}
+                    </span>
+                  </div>
+                  {/* buttons count */}
+                  <div className="flex items-center sm:min-w-32 justify-between rounded-lg border border-gray-400 ">
+                    <button
+                      onClick={() => decrementItem(item.id)}
+                      className=" p-2 "
+                    >
+                      -
+                    </button>
+                    <span className="px-4">{item.quantity}</span>
+                    <button onClick={() => addItem(item)} className=" p-2 ">
+                      +
+                    </button>
+                  </div>
+                </div>
               </div>
               <button
                 onClick={() => removeItem(item.id)}
