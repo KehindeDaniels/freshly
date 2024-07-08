@@ -49,7 +49,7 @@ const AboutProduct = () => {
   };
 
   return (
-    <div className="contain mt-8 ">
+    <div className="contain mt-8 p-4">
       <Link to="/" className=" hover:text-green-700 flex items-center mb-4">
         &#8592; Back
       </Link>
