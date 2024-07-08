@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useCart } from "../CartContext";
 import products from "../../data";
+import ProductGrid from "../components/ProductGrid";
 
 const AboutProduct = () => {
   const { productName } = useParams();
@@ -129,6 +130,10 @@ const AboutProduct = () => {
             </button>
           </div>
         </div>
+      </div>
+      <div className="more mt-16 text-center sm:text-left ">
+        <h3 className="font-bold pl-4">MORE FOR YOU</h3>
+        <ProductGrid products={products} />
       </div>
     </div>
   );
