@@ -38,10 +38,10 @@ const Home = () => {
   );
 
   return (
-    <div className="mt-16 px-4">
-      <div className=" relative flex justify-between items-center px-4 lg:flex-row">
+    <div className="mt-16  sm:px-4">
+      <div className=" relative flex justify-between items-start px-4 lg:flex-row">
         <h2 className="font-bold text-xl mb-4 lg:mb-0">Fresh Produce</h2>
-        <div className="lg:hidden">
+        <div className="lg:hidden ">
           <button onClick={toggleDropdown} className=" text-3xl">
             &#9776;
           </button>
