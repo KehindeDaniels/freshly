@@ -4,7 +4,7 @@ const products = [
     name: "Lettuce Leaf",
     description:
       "Discover the unparalleled freshness and quality of our farm-fresh lettuce, harvested daily from our local fields. Our lettuce is nurtured with care, ensuring that each leaf is packed with flavor and nutrients.",
-    category: "Vegetables",
+    category: "Veggies",
     price: 900,
     image: "/assets/lettuce.png",
     pricePer: "per Bundle",
@@ -16,7 +16,7 @@ const products = [
     name: "Tomatoes",
     description:
       "Experience the rich, robust flavor of our sun-ripened tomatoes. Perfect for salads, sauces, and slicing, our tomatoes are hand-picked for their vibrant color and firmness.",
-    category: "Vegetables",
+    category: "Veggies",
     price: 1200,
     image: "/assets/tomatoes.png",
     pricePer: "per Kilogram",
@@ -28,7 +28,7 @@ const products = [
     name: "Onions",
     description:
       "Add depth and intensity to any dish with our premium onions. Grown in fertile soil, these onions provide a strong, yet sweet flavor when cooked.",
-    category: "Vegetables",
+    category: "Veggies",
     price: 900,
     image: "/assets/onions.png",
     pricePer: "per Kilogram",
@@ -52,7 +52,7 @@ const products = [
     name: "Scotch Bonnets",
     description:
       "Turn up the heat with our fiery Scotch Bonnet peppers. Ideal for those who dare to explore spicy cuisines, these peppers are a staple in Caribbean dishes.",
-    category: "Vegetables",
+    category: "Veggies",
     price: 600,
     image: "/assets/scotch.png",
     pricePer: "per Kilogram",
@@ -64,7 +64,7 @@ const products = [
     name: "Eggplant",
     description:
       "Our eggplants boast a glossy exterior and a spongy texture that absorbs flavors beautifully, making them perfect for your culinary experiments.",
-    category: "Vegetables",
+    category: "Veggies",
     price: 900,
     image: "/assets/Egg-plant.png",
     pricePer: "per Whole",

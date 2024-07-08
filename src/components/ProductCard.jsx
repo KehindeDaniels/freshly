@@ -7,8 +7,8 @@ const ProductCard = ({ product, to }) => {
   const { addItem } = useCart(); // Get addItem function from context
 
   return (
-    <div className="p-2 rounded-lg bg-white shadow-md overflow-hidden relative group hover:bg-gray-50 transition-colors">
-      <div className="image relative flex items-center justify-center bg-[#F6F6F6]">
+    <div className="p-2 rounded-lg bg-white border-t-[0.1px] shadow-md border-gray-300 overflow-hidden relative group hover:bg-gray-50 transition-colors">
+      <div className="image relative flex items-center justify-center bg-[#F6F6F6] rounded">
         <img
           src={product.image}
           alt={product.name}
@@ -34,7 +34,7 @@ const ProductCard = ({ product, to }) => {
         </Link>
         <p className="text-gray-600">{`₦${product.price}`}</p>
       </div>
-      <button className="absolute top-2 right-2 text-gray-500 hover:text-red-500">
+      <button className="absolute top-4 right-6 p-2 rounded-full bg-white text-gray-200 hover:text-red-500">
         <FaHeart />
       </button>
     </div>
