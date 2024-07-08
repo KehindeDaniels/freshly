@@ -5,104 +5,112 @@ import products from "../../data";
 
 const AboutProduct = () => {
   const { productName } = useParams();
-  const { items, addItem, decrementItem, totalItems } = useCart();
+  const { addItem, decrementItem } = useCart();
   const product = products.find((p) => p.name === productName);
-
-  const imageSizes = [
-    { size: "s", src: product.image },
-    { size: "m", src: product.image },
-    { size: "l", src: product.image },
-    { size: "+" },
-  ];
-
-  const sizes = imageSizes.map((imageSize, index) => (
-    <div
-      key={index}
-      className="flex flex-col justify-center items-center gap-2 flex-1"
-    >
-      {imageSize.src && (
-        <div className="img w-28 bg-green-100 p-2 rounded-lg hover:border hover:border-orange-300">
-          <img
-            src={imageSize.src}
-            alt={imageSize.size}
-            className="max-w-16 mx-auto"
-          />
-        </div>
-      )}
-      <p className="font-bold text-lg">{imageSize.size}</p>
-    </div>
-  ));
 
   if (!product) {
     return <div>Product not found</div>;
   }
 
+  // Assuming each product has a star rating and a number of reviews
+  const renderStars = (starsCount) => {
+    let stars = [];
+    for (let i = 0; i < starsCount; i++) {
+      stars.push(
+        <span key={i} className="text-green-500">
+          ★
+        </span>
+      );
+    }
+    return stars;
+  };
+
   return (
-    <div className="">
+    <div className="container mx-auto px-4 py-8">
       <Link
         to="/"
-        className="text-blue-500 hover:text-blue-700 flex items-center"
+        className="text-blue-500 hover:text-blue-700 flex items-center mb-4"
       >
-        Back
+        &#8592; Back
       </Link>
-      <div className="container flex flex-col md:flex-row  gap-8">
-        <div className="images flex-1 flex flex-col gap-4 ">
-          <div className="image-top">
+      <div className="flex flex-col items-center md:flex-row gap-8">
+        <div className="flex-1 max-w-96">
+          <div className="rounded-lg shadow-lg bg-green-50">
             <img
               src={product.image}
               alt={product.name}
-              className="w-full max-w-md"
+              className="max-w-52 mx-auto object-center"
             />
           </div>
-          <div className="image-bottom flex gap-4">{sizes}</div>
+
+          <div className="flex justify-center gap-4 mt-4">
+            {/* Small size preview */}
+            <img
+              src={product.image}
+              alt="Small"
+              className="w-20 h-20 rounded-lg cursor-pointer"
+            />
+            {/* Medium size preview */}
+            <img
+              src={product.image}
+              alt="Medium"
+              className="w-24 h-24 rounded-lg cursor-pointer"
+            />
+            {/* Large size preview */}
+            <img
+              src={product.image}
+              alt="Large"
+              className="w-28 h-28 rounded-lg cursor-pointer"
+            />
+          </div>
         </div>
-        <div className="description flex-1">
-          <div className="flex flex-col  ">
-            <div className="name-price flex justify-between items-start">
-              <div className="name ">
-                <h2 className="text-2xl font-bold mb-2">{product.name}</h2>
-                {product.stars}
-              </div>
-
-              <div className="text-lg text-green-400">{product.price} </div>
-            </div>
-
-            <div className="quantity flex flex-col items-start">
-              <p>Quantity</p>
-              <div className="buttons text-xl flex border border-gray-300 rounded-lg w-16 justify-between items-center py-2 px-2 w-48 ">
-                <button className="" onClick={() => decrementItem(items.id)}>
-                  -
-                </button>
-                {totalItems}
-                {/* {console.log(items)} */}
-                <button className="" onClick={() => addItem(items)}>
-                  +
-                </button>
-              </div>
-            </div>
-
-            <p className="text-gray-700 text-base my-4">
-              <span className="block mb-2">DESCRIPTION</span>
-              {product.description}
-            </p>
-
-            <div className="button flex gap-4 flex-col  md:flex-row ">
-              <button className="bg-green-500 hover:bg-green-700 text-white font-medium py-2 px-8 rounded">
-                Buy Now
+        <div className="flex-1">
+          <h1 className="text-3xl font-bold">
+            {product.name}{" "}
+            <span className="text-green-600 text-xl">₦{product.price}</span>
+          </h1>
+          <div className="flex items-center mt-2">
+            {renderStars(product.stars)}
+            <span className="text-sm text-gray-500 ml-2">
+              ({product.rating} reviews)
+            </span>
+          </div>
+          <div className="mt-4 ">
+            <label className="font-bold">Quantity</label>
+            <div className="flex items-center justify-between w-32 border rounded overflow-hidden mt-1">
+              <button
+                onClick={() => decrementItem(product.id)}
+                className="p-2 bg-gray-200 hover:bg-gray-300"
+              >
+                -
               </button>
+              <div className="p-2">1</div>
               <button
                 onClick={() => addItem(product)}
-                className="text-green-800 font-bold"
+                className="p-2 bg-gray-200 hover:bg-gray-300"
               >
-                Add to Cart
+                +
               </button>
             </div>
+          </div>
+          <p className="mt-4">
+            <strong>Description:</strong>
+            <br />
+            {product.description}
+          </p>
+          <div className="mt-4 flex gap-4">
+            <button className="bg-green-600 hover:bg-green-600 text-white py-2 px-4 rounded">
+              Buy Now
+            </button>
+            <button
+              onClick={() => addItem(product)}
+              className=" text-green-800 font-bold py-2 px-4 rounded"
+            >
+              Add To Cart
+            </button>
           </div>
         </div>
       </div>
-
-      {/* <button onClick={() => addItem(items)}>+</button>
-      <button onClick={() => addItem(items)}>+</button> */}
     </div>
   );
 };
