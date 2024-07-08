@@ -54,7 +54,7 @@ const AboutProduct = () => {
         &#8592; Back
       </Link>
       <div className="flex flex-col items-center md:flex-row gap-8 w-full">
-        <div className="flex-1 rounded-lg bg-green-50 py-8">
+        <div className="flex-1 rounded-lg bg-green-100 py-8">
           <img
             src={product.image}
             alt={product.name}
@@ -63,7 +63,7 @@ const AboutProduct = () => {
         </div>
 
         <div className="description md:pr-16 flex-1 flex flex-col justify-center items-center text-center md:text-left md:items-start">
-          <h1 className="text-3xl font-bold md:flex md:justify-between md:items-center md:w-full">
+          <h1 className="text-3xl font-bold flex flex-col md:flex md:flex-row md:justify-between md:items-center md:w-full">
             {product.name}{" "}
             <span className="text-green-600 text-xl">₦{product.price}</span>
           </h1>
