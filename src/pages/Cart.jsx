@@ -5,23 +5,32 @@ import { Link } from "react-router-dom";
 const Cart = () => {
   const { items, addItem, decrementItem, removeItem, clearCart } = useCart();
 
+  // Calculate subtotal
+  const subtotal = Object.values(items).reduce(
+    (acc, item) => acc + item.quantity * item.price,
+    0
+  );
+
+  // Assume delivery is a flat rate; could also be dynamic
+  const delivery = 500;
+
+  // Calculate total
+  const total = subtotal + delivery;
+
   if (Object.keys(items).length === 0) {
     return (
       <div className="flex flex-col justify-center items-center min-h-screen gap-8 px-4">
-        <p className="font-bold text-3xl text-center md:text-4xl">
+        <p className="font-bold text-3xl text-center">
           So you came here without buying anything?
         </p>
-        <div className="rounded-full bg-green-50 h-40 w-40 md:h-64 md:w-64">
+        <div className="rounded-full bg-green-50 h-40 w-40">
           <img
             src="/assets/face.png"
             alt="Empty Cart"
             className="object-cover rounded-full h-full"
           />
         </div>
-        <Link
-          to="/"
-          className="bg-red-500 text-white py-2 px-4 rounded text-lg"
-        >
+        <Link to="/" className="bg-red-500 text-white py-2 px-4 rounded">
           Leave here
         </Link>
       </div>
@@ -36,53 +45,70 @@ const Cart = () => {
       >
         Back
       </Link>
-      <div className="p-4">
-        {Object.values(items).map((item) => (
-          <div
-            key={item.id}
-            className="flex flex-col md:flex-row justify-between items-center mb-4 gap-4"
-          >
-            <img
-              src={item.image}
-              alt={item.name}
-              className="w-full md:w-20 md:h-20 object-cover rounded"
-            />
-            <div className="text-lg md:text-xl font-bold">{item.name}</div>
-            <div className="flex items-center">
+      <div className="flex flex-col md:flex-row justify-between p-4">
+        <div className="flex-1 ">
+          {Object.values(items).map((item) => (
+            <div
+              key={item.id}
+              className="flex flex-col relative md:flex-row justify-between items-center mb-4 gap-4 p-4 shadow rounded-lg"
+            >
+              <img
+                src={item.image}
+                alt={item.name}
+                className="w-32 h-32 object-cover rounded"
+              />
+              <div className="flex-1">
+                <h5 className="text-xl font-bold">{item.name}</h5>
+                {/* <p className="text-gray-500">{item.description}</p> */}
+                <p className="text-sm">Size: S</p>
+                <p className="text-lg">₦{item.price}</p>
+              </div>
+              <div className="flex items-center">
+                <button
+                  onClick={() => decrementItem(item.id)}
+                  className="bg-gray-200 hover:bg-gray-300 text-black font-bold py-1 px-3 rounded"
+                >
+                  -
+                </button>
+                <span className="px-4">{item.quantity}</span>
+                <button
+                  onClick={() => addItem(item)}
+                  className="bg-gray-200 hover:bg-gray-300 text-black font-bold py-1 px-3 rounded"
+                >
+                  +
+                </button>
+              </div>
               <button
-                onClick={() => decrementItem(item.id)}
-                className="bg-red-300 hover:bg-red-400 text-white font-bold py-1 px-3 rounded"
+                onClick={() => removeItem(item.id)}
+                className=" hover:text-red-700 text-2xl absolute top-0 right-8"
               >
-                -
-              </button>
-              <span className="px-4">{item.quantity}</span>
-              <button
-                onClick={() => addItem(item)}
-                className="bg-green-300 hover:bg-green-400 text-white font-bold py-1 px-3 rounded"
-              >
-                +
+                x
               </button>
             </div>
-            <div className="font-semibold">{`Price: ₦${
-              item.price * item.quantity
-            }`}</div>
-            <button
-              onClick={() => removeItem(item.id)}
-              className="text-red-500 hover:text-red-700"
-            >
-              Remove
-            </button>
-          </div>
-        ))}
-        <div className="flex justify-center gap-4 mt-4 flex-col md:flex-row">
+          ))}
           <button
             onClick={clearCart}
-            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-4"
           >
             Clear Cart
           </button>
-          <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-            Proceed to Checkout
+        </div>
+        <div className="w-80 p-4 ml-4 bg-white shadow rounded-lg">
+          <h4 className="text-xl font-bold mb-4">Order Summary</h4>
+          <div className="flex justify-between">
+            <p>Subtotal</p>
+            <p>₦{subtotal}</p>
+          </div>
+          <div className="flex justify-between">
+            <p>Delivery</p>
+            <p>₦{delivery}</p>
+          </div>
+          <div className="flex justify-between font-bold mt-4">
+            <p>Total</p>
+            <p>₦{total}</p>
+          </div>
+          <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-4 w-full">
+            Checkout Now
           </button>
         </div>
       </div>

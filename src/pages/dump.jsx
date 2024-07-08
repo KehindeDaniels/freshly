@@ -1,118 +1,93 @@
 import React from "react";
-import { Link, useParams } from "react-router-dom";
 import { useCart } from "../CartContext";
-import products from "../../data";
+import { Link } from "react-router-dom";
 
-const AboutProduct = () => {
-  const { productName } = useParams();
-  const { addItem, decrementItem } = useCart();
-  const product = products.find((p) => p.name === productName);
+const Cart = () => {
+  const { items, addItem, decrementItem, removeItem, clearCart } = useCart();
 
-  if (!product) {
-    return <div>Product not found</div>;
+  if (Object.keys(items).length === 0) {
+    return (
+      <div className="flex flex-col justify-center items-center min-h-screen gap-8 px-4">
+        <p className="font-bold text-3xl text-center md:text-4xl">
+          So you came here without buying anything?
+        </p>
+        <div className="rounded-full bg-green-50 h-40 w-40 md:h-64 md:w-64">
+          <img
+            src="/assets/face.png"
+            alt="Empty Cart"
+            className="object-cover rounded-full h-full"
+          />
+        </div>
+        <Link
+          to="/"
+          className="bg-red-500 text-white py-2 px-4 rounded text-lg"
+        >
+          Leave here
+        </Link>
+      </div>
+    );
   }
 
-  // Assuming each product has a star rating and a number of reviews
-  const renderStars = (starsCount) => {
-    let stars = [];
-    for (let i = 0; i < starsCount; i++) {
-      stars.push(
-        <span key={i} className="text-green-500">
-          ★
-        </span>
-      );
-    }
-    return stars;
-  };
-
   return (
-    <div className="container mx-auto px-4 py-8">
+    <>
       <Link
         to="/"
-        className="text-blue-500 hover:text-blue-700 flex items-center mb-4"
+        className="bg-gray-200 text-black py-2 px-4 rounded hover:bg-gray-300 transition-colors m-4"
       >
-        &#8592; Back
+        Back
       </Link>
-      <div className="flex flex-col items-center md:flex-row gap-8">
-        <div className="flex-1 max-w-96">
-          <div className="rounded-lg shadow-lg bg-green-50">
+      <div className="p-4">
+        {Object.values(items).map((item) => (
+          <div
+            key={item.id}
+            className="flex flex-col md:flex-row justify-between items-center mb-4 gap-4"
+          >
             <img
-              src={product.image}
-              alt={product.name}
-              className="max-w-52 mx-auto object-center"
+              src={item.image}
+              alt={item.name}
+              className="w-full md:w-20 md:h-20 object-cover rounded"
             />
-          </div>
-
-          <div className="flex justify-center gap-4 mt-4">
-            {/* Small size preview */}
-            <img
-              src={product.image}
-              alt="Small"
-              className="w-20 h-20 rounded-lg cursor-pointer"
-            />
-            {/* Medium size preview */}
-            <img
-              src={product.image}
-              alt="Medium"
-              className="w-24 h-24 rounded-lg cursor-pointer"
-            />
-            {/* Large size preview */}
-            <img
-              src={product.image}
-              alt="Large"
-              className="w-28 h-28 rounded-lg cursor-pointer"
-            />
-          </div>
-        </div>
-        <div className="flex-1">
-          <h1 className="text-3xl font-bold">
-            {product.name}{" "}
-            <span className="text-green-600 text-xl">₦{product.price}</span>
-          </h1>
-          <div className="flex items-center mt-2">
-            {renderStars(product.stars)}
-            <span className="text-sm text-gray-500 ml-2">
-              ({product.rating} reviews)
-            </span>
-          </div>
-          <div className="mt-4 ">
-            <label className="font-bold">Quantity</label>
-            <div className="flex items-center justify-between w-32 border rounded overflow-hidden mt-1">
+            <div className="text-lg md:text-xl font-bold">{item.name}</div>
+            <div className="flex items-center">
               <button
-                onClick={() => decrementItem(product.id)}
-                className="p-2 bg-gray-200 hover:bg-gray-300"
+                onClick={() => decrementItem(item.id)}
+                className="bg-red-300 hover:bg-red-400 text-white font-bold py-1 px-3 rounded"
               >
                 -
               </button>
-              <div className="p-2">1</div>
+              <span className="px-4">{item.quantity}</span>
               <button
-                onClick={() => addItem(product)}
-                className="p-2 bg-gray-200 hover:bg-gray-300"
+                onClick={() => addItem(item)}
+                className="bg-green-300 hover:bg-green-400 text-white font-bold py-1 px-3 rounded"
               >
                 +
               </button>
             </div>
-          </div>
-          <p className="mt-4">
-            <strong>Description:</strong>
-            <br />
-            {product.description}
-          </p>
-          <div className="mt-4 flex gap-4">
-            <button className="bg-green-600 hover:bg-green-600 text-white py-2 px-4 rounded">
-              Buy Now
-            </button>
+            <div className="font-semibold">{`Price: ₦${
+              item.price * item.quantity
+            }`}</div>
             <button
-              onClick={() => addItem(product)}
-              className=" text-green-800 font-bold py-2 px-4 rounded"
+              onClick={() => removeItem(item.id)}
+              className="text-red-500 hover:text-red-700"
             >
-              Add To Cart
+              Remove
             </button>
           </div>
+        ))}
+        <div className="flex justify-center gap-4 mt-4 flex-col md:flex-row">
+          <button
+            onClick={clearCart}
+            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+          >
+            Clear Cart
+          </button>
+          <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+            Proceed to Checkout
+          </button>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
-export default AboutProduct;
+export default Cart;
