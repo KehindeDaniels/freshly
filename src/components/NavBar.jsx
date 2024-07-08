@@ -1,27 +1,46 @@
-// NavBar.jsx
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaSearch, FaHeart, FaShoppingCart, FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { useCart } from "../CartContext"; // Ensure the path is correct based on your structure
+import { useCart } from "../CartContext";
 import logo from "/assets/logo.png";
 
 const NavBar = () => {
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(true); // Default to true for larger screens
   const [searchQuery, setSearchQuery] = useState("");
-  const { totalItems } = useCart(); // Use totalItems from the cart context
+  const { totalItems } = useCart();
 
   const toggleSearch = () => {
     setIsSearchOpen(!isSearchOpen);
   };
 
+  // Effect to manage the state of search bar based on window width
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setIsSearchOpen(false); // Collapse on small screens
+      } else {
+        setIsSearchOpen(true); // Expand on large screens
+      }
+    };
+
+    // Set initial state based on current window width
+    handleResize();
+
+    // Add event listener for window resize
+    window.addEventListener("resize", handleResize);
+
+    // Clean up listener
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
-    <header className="flex items-center justify-between px-4 py-2 bg-white border-b-[1px] overflow-hidden">
-      <Link to="/" className="flex items-center">
+    <header className="flex items-center justify-between px-4 py-4 bg-white border-b-[1px] overflow-hidden">
+      <Link to="/" className="flex items-start">
         <img src={logo} alt="Freshly Logo" className="w-20" />
       </Link>
       <div
-        className={`search-bar flex items-center border rounded-lg p-2 ${
-          isSearchOpen ? "" : ""
+        className={`search-bar flex items-center border rounded-lg p-2 md:pr-32 md:pl-8 ${
+          isSearchOpen ? "flex-grow-0" : ""
         }`}
       >
         <FaSearch
