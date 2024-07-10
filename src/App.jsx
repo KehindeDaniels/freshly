@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import AboutProduct from "./pages/AboutProduct";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
+import F4o4 from "./pages/Error404";
 
 export default function App() {
   return (
@@ -18,6 +19,7 @@ export default function App() {
             <Route path="product/:productName" element={<AboutProduct />} />
             <Route path="cart" element={<Cart />} />
             <Route path="checkout" element={<Checkout />} />
+            <Route path="*" element={<F4o4 />} />
           </Route>
         </Routes>
       </BrowserRouter>

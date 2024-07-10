@@ -23,17 +23,17 @@ const ProductCard = ({ product, to }) => {
           </button>
         </div>
       </div>
-
-      <div className="p-4 flex justify-between items-end">
-        <Link
-          to={to}
-          className="name-priceper flex flex-col no-underline text-black"
-        >
+      <Link
+        to={to}
+        className="name-priceper flex flex-col no-underline text-black"
+      >
+        <div className="p-4 flex justify-between items-end">
           <h3 className="text-lg font-bold">{product.name}</h3>
           <p className="text-gray-600">{`${product.pricePer}`}</p>
-        </Link>
-        <p className="text-gray-600">{`₦${product.price}`}</p>
-      </div>
+
+          <p className="text-gray-600">{`₦${product.price}`}</p>
+        </div>
+      </Link>
       <button className="absolute top-4 right-6 p-2 rounded-full bg-white text-gray-200 hover:text-red-500">
         <FaHeart />
       </button>
