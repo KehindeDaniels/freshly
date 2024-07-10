@@ -8,9 +8,9 @@ const Cart = () => {
     (acc, item) => acc + item.quantity * item.price,
     0
   );
-  const delivery = 500; // Fixed delivery cost
-  const VAT = 0; // VAT not applied in this example, adjust as necessary
-  const grossTotal = subtotal + delivery + VAT; // Calculating Gross Total
+  const delivery = 500;
+  const VAT = 0;
+  const grossTotal = subtotal + delivery + VAT;
 
   if (Object.keys(items).length === 0) {
     return (
