@@ -61,7 +61,6 @@ function cartReducer(state, action) {
 export const CartProvider = ({ children }) => {
   const [state, dispatch] = useReducer(cartReducer, initialState);
 
-  // Helper functions
   const addItem = (item) => dispatch({ type: "ADD_ITEM", payload: item });
   const decrementItem = (id) => dispatch({ type: "DECREMENT_ITEM", id });
   const removeItem = (id) => dispatch({ type: "REMOVE_ITEM", id });

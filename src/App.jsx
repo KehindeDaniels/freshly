@@ -10,8 +10,6 @@ import F4o4 from "./pages/Error404";
 export default function App() {
   return (
     <CartProvider>
-      {" "}
-      {/* Wrap routes with CartProvider */}
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>

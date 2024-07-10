@@ -44,7 +44,7 @@ const AboutProduct = () => {
   const handleAddToCart = () => {
     if (quantity > 0) {
       addItem({ ...product, quantity });
-      setQuantity(0); // Reset quantity after adding to cart
+      setQuantity(0);
     }
   };
 

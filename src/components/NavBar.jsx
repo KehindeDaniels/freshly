@@ -13,23 +13,19 @@ const NavBar = () => {
     setIsSearchOpen(!isSearchOpen);
   };
 
-  // Effect to manage the state of search bar based on window width
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 768) {
-        setIsSearchOpen(false); // Collapse on small screens
+        setIsSearchOpen(false);
       } else {
-        setIsSearchOpen(true); // Expand on large screens
+        setIsSearchOpen(true);
       }
     };
 
-    // Set initial state based on current window width
     handleResize();
 
-    // Add event listener for window resize
     window.addEventListener("resize", handleResize);
 
-    // Clean up listener
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
