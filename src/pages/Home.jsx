@@ -1,7 +1,7 @@
 // Home.jsx
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import ProductGrid from "../components/ProductGrid"; // Adjust the path as necessary
+import ProductGrid from "../components/ProductGrid"; // Ensure the path is correct
 
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -20,7 +20,7 @@ const Home = () => {
             organization_id: "11343c2c0437476dba5536df99cbe69c",
             reverse_sort: false,
             page: currentPage,
-            size: 10,
+            size: 8, // Set the number of items per page to 8
             Appid: "H27ZVCZ80DF4IK1",
             Apikey: "5203adc5898f4a388c31673baa009d0620240712211620313589",
           },
@@ -39,14 +39,27 @@ const Home = () => {
   }, [currentPage]);
 
   return (
-    <div>
-      <h2>{loading ? "Loading..." : "Fetched Products"}</h2>
-      {error && <p>{error}</p>}
+    <div className="container mx-auto px-4">
+      <h2 className="text-lg font-bold mb-4">
+        {loading ? "Loading..." : "Freshly Project"}
+      </h2>
+      {error && <p className="text-red-500">{error}</p>}
       <ProductGrid products={products} />
-      <button onClick={() => setCurrentPage((p) => p + 1)}>Next Page</button>
-      <button onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}>
-        Previous Page
-      </button>
+      <div className="flex justify-between mt-4">
+        <button
+          onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          disabled={currentPage === 1}
+        >
+          Previous
+        </button>
+        <button
+          onClick={() => setCurrentPage((p) => p + 1)}
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
 };
