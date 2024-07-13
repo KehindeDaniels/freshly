@@ -7,7 +7,7 @@ module.exports = function (app) {
       target: "https://api.timbu.com",
       changeOrigin: true,
       pathRewrite: {
-        "^/api": "", // Remove /api prefix when requesting the target server
+        "^/api": "",
       },
     })
   );
