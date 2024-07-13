@@ -16,8 +16,9 @@ const AboutProduct = () => {
       try {
         const url = `https://timbu-get-all-products.reavdev.workers.dev/${encodeURIComponent(
           productName
-        )}`; // Correctly encoding the product name
+        )}`;
         const response = await axios.get(url);
+        console.log("API response data:", response.data); // Debugging the API response
         if (response.status === 200 && response.data) {
           setProduct(response.data);
         } else {
@@ -58,6 +59,7 @@ const AboutProduct = () => {
     }
   };
 
+  // Function to get the image URL safely
   const getImageUrl = (product) => {
     return product && product.photos && product.photos.length > 0
       ? `https://api.timbu.cloud/images/${product.photos[0].url}`
@@ -117,7 +119,8 @@ const AboutProduct = () => {
       </div>
       <div className="more mt-16 text-center sm:text-left">
         <h3 className="font-bold pl-4">MORE FOR YOU</h3>
-        <ProductGrid products={[product]} />
+        <ProductGrid products={[product]} /> // Assuming this section is for
+        related products or suggestions
       </div>
     </div>
   );
