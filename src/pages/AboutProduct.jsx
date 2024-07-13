@@ -119,8 +119,7 @@ const AboutProduct = () => {
       </div>
       <div className="more mt-16 text-center sm:text-left">
         <h3 className="font-bold pl-4">MORE FOR YOU</h3>
-        <ProductGrid products={[product]} /> // Assuming this section is for
-        related products or suggestions
+        <ProductGrid products={[product]} />
       </div>
     </div>
   );
