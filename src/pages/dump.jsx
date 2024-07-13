@@ -1,92 +1,61 @@
-import React from "react";
+import React, { useState } from "react";
+import ProductGrid from "../components/ProductGrid";
+import products from "../../data";
 
-const Checkout = () => {
+const Home = () => {
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const Allfilters = [
+    { name: "All", src: "/assets/all.png" },
+    { name: "Fruits", src: "/assets/fruits.png" },
+    { name: "Veggies", src: "/assets/vegetables.png" },
+    { name: "Grain", src: "/assets/grain.png" },
+  ];
+
+  const handleFilterClick = (category) => {
+    setSelectedCategory(category);
+    setIsDropdownOpen(false); // Close the dropdown when a category is selected
+  };
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const filters = Allfilters.map((filter, index) => (
+    <div
+      key={index}
+      onClick={() => handleFilterClick(filter.name)}
+      className="flex items-center justify-center gap-1 hover:border-b-2 hover:border-green-500 cursor-pointer"
+    >
+      <img src={filter.src} alt={filter.name} className="w-10" />
+      <p>{filter.name}</p>
+    </div>
+  ));
+
+  const filteredProducts = products.filter((product) =>
+    selectedCategory === "All" ? true : product.category === selectedCategory
+  );
+
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-2xl font-bold text-center mb-8">Checkout</h1>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {/* Shipping and Payment Information */}
-        <div className="md:col-span-2 space-y-6">
-          <section>
-            <h2 className="text-xl font-semibold">Shipping Information</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
-              <input
-                type="text"
-                placeholder="Address"
-                className="p-2 border rounded"
-              />
-              <input
-                type="text"
-                placeholder="City/Town"
-                className="p-2 border rounded"
-              />
-              <input
-                type="text"
-                placeholder="State"
-                className="p-2 border rounded"
-              />
-              <input
-                type="text"
-                placeholder="Country"
-                className="p-2 border rounded"
-              />
-            </div>
-          </section>
-          <section>
-            <h2 className="text-xl font-semibold mt-6">Card Information</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4">
-              <input
-                type="text"
-                placeholder="Card Number"
-                className="p-2 border rounded sm:col-span-2"
-              />
-              <input
-                type="text"
-                placeholder="Expiry Date"
-                className="p-2 border rounded"
-              />
-              <input
-                type="text"
-                placeholder="CVV"
-                className="p-2 border rounded"
-              />
-            </div>
-          </section>
-          <p className="text-sm text-gray-500 mt-4">
-            *This transaction is secured by DNS encryption
-          </p>
-        </div>
-
-        {/* Order Summary */}
-        <div className="bg-gray-100 p-4 rounded-lg">
-          <h2 className="text-xl font-semibold">Order Summary</h2>
-          <div className="flex justify-between mt-4">
-            <span>Subtotal</span>
-            <span>₦4500</span>
-          </div>
-          <div className="flex justify-between">
-            <span>Delivery</span>
-            <span>₦500</span>
-          </div>
-          <div className="flex justify-between">
-            <span>VAT</span>
-            <span>₦0</span>
-          </div>
-          <div className="flex justify-between font-bold mt-4">
-            <span>Gross Total</span>
-            <span>₦5000</span>
-          </div>
-          <button className="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded mt-4 w-full">
-            Pay ₦5000
+    <div className="mt-8 md:mt-16  sm:px-4">
+      <div className=" relative flex justify-between items-start px-4 lg:flex-row">
+        <h2 className="font-bold text-xl mb-4 lg:mb-0">Fresh Produce</h2>
+        <div className="lg:hidden ">
+          <button onClick={toggleDropdown} className=" text-3xl">
+            &#9776;
           </button>
-          <p className="text-xs text-center mt-4">
-            *By clicking this button, you agree to the Terms and Conditions of
-            Freshly inc.
-          </p>
+          {isDropdownOpen && (
+            <div className="grid grid-cols-2 gap-4 p-8 absolute top-8 right-4 w-64 bg-white shadow-md mt-2  z-10">
+              {filters}
+            </div>
+          )}
         </div>
+        <div className="hidden lg:flex gap-8">{filters}</div>
       </div>
+      <ProductGrid products={filteredProducts} />
     </div>
   );
 };
 
-export default Checkout;
+export default Home;
