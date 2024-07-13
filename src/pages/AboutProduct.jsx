@@ -59,7 +59,6 @@ const AboutProduct = () => {
     }
   };
 
-  // Function to get the image URL safely
   const getImageUrl = (product) => {
     return product && product.photos && product.photos.length > 0
       ? `https://api.timbu.cloud/images/${product.photos[0].url}`

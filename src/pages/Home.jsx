@@ -1,7 +1,7 @@
 // Home.jsx
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import ProductGrid from "../components/ProductGrid"; // Ensure the path is correct
+import ProductGrid from "../components/ProductGrid";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -20,9 +20,9 @@ const Home = () => {
             organization_id: "11343c2c0437476dba5536df99cbe69c",
             reverse_sort: false,
             page: currentPage,
-            size: 8, // Set the number of items per page to 8
-            Appid: "H27ZVCZ80DF4IK1",
-            Apikey: "5203adc5898f4a388c31673baa009d0620240712211620313589",
+            size: 8,
+            Appid: import.meta.env.VITE_APP_ID,
+            Apikey: import.meta.env.VITE_API_KEY,
           },
         });
         if (response.status === 200) {
