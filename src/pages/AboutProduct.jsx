@@ -1,38 +1,27 @@
+// AboutProduct.jsx
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useCart } from "../CartContext";
+import { useProducts } from "../contexts/ProductContext"; // Adjust the import path as necessary
 import ProductGrid from "../components/ProductGrid";
-import axios from "axios";
 
 const AboutProduct = () => {
   const { productName } = useParams();
+  const { products } = useProducts();
   const { addItem } = useCart();
   const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(0);
   const [error, setError] = useState("");
 
   useEffect(() => {
-    const fetchProduct = async () => {
-      try {
-        const url = `https://timbu-get-all-products.reavdev.workers.dev/${encodeURIComponent(
-          productName
-        )}`;
-        const response = await axios.get(url);
-        console.log("API response data:", response.data); // Debugging the API response
-        if (response.status === 200 && response.data) {
-          setProduct(response.data);
-        } else {
-          setError("Product not found");
-        }
-      } catch (err) {
-        const message = err.response ? err.response.data.message : err.message;
-        setError("Error fetching product details: " + message);
-        console.error("Error fetching product details:", message);
-      }
-    };
-
-    fetchProduct();
-  }, [productName]);
+    const foundProduct = products.find((p) => p.name === productName);
+    if (foundProduct) {
+      setProduct(foundProduct);
+      console.log("Found product:", foundProduct); // Debugging statement
+    } else {
+      setError("Product not found");
+    }
+  }, [productName, products]);
 
   if (error) {
     return <div className="container mt-8 p-4">{error}</div>;
@@ -65,6 +54,10 @@ const AboutProduct = () => {
       : "path_to_default_image.jpg"; // Provide a default image if not available
   };
 
+  const formattedPrice = product.current_price
+    ? product.current_price[0]["NGN"][0]
+    : "N/A";
+
   return (
     <div className="container mt-8 p-4">
       <Link to="/" className="hover:text-green-700 flex items-center mb-4">
@@ -82,9 +75,7 @@ const AboutProduct = () => {
         <div className="description md:pr-16 flex-1 flex flex-col justify-center items-center text-center md:text-left md:items-start">
           <h1 className="text-3xl font-bold flex flex-col md:flex-row md:justify-between md:items-center md:w-full">
             {product.name}
-            <span className="text-green-600 text-xl">
-              ₦{product.price || "N/A"}
-            </span>
+            <span className="text-green-600 text-xl">₦{formattedPrice}</span>
           </h1>
           <div className="mt-4">
             <label className="font-bold">Quantity</label>

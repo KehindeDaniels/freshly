@@ -1,10 +1,11 @@
 // Home.jsx
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useProducts } from "../contexts/ProductContext"; // Adjust the import path as necessary
 import ProductGrid from "../components/ProductGrid";
 
 const Home = () => {
-  const [products, setProducts] = useState([]);
+  const { products, setProducts } = useProducts();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -36,7 +37,7 @@ const Home = () => {
       }
     };
     fetchProducts();
-  }, [currentPage]);
+  }, [currentPage, setProducts]);
 
   return (
     <div className="container mx-auto px-4">

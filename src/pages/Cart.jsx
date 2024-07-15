@@ -1,13 +1,25 @@
 import React from "react";
 import { useCart } from "../CartContext";
 import { Link } from "react-router-dom";
+import { useProducts } from "../contexts/ProductContext"; // Adjust the import path as necessary
 
 const Cart = () => {
   const { items, addItem, decrementItem, removeItem, clearCart } = useCart();
-  const subtotal = Object.values(items).reduce(
-    (acc, item) => acc + item.quantity * item.price,
-    0
-  );
+  const { products } = useProducts();
+
+  // Helper function to get product details from context
+  const getProductDetails = (id) => {
+    return products.find((product) => product.id === id);
+  };
+
+  // Calculate subtotal
+  const subtotal = Object.values(items).reduce((acc, item) => {
+    const product = getProductDetails(item.id);
+    return (
+      acc + item.quantity * (product ? product.current_price[0]["NGN"][0] : 0)
+    );
+  }, 0);
+
   const delivery = 500;
   const VAT = 0;
   const grossTotal = subtotal + delivery + VAT;
@@ -41,54 +53,59 @@ const Cart = () => {
       <div className="flex flex-col lg:flex-row justify-between gap-6 mt-8 ">
         <div className="flex-1 ">
           <div className="font-bold text-lg mb-2">Your Cart</div>
-          {Object.values(items).map((item) => (
-            <div
-              key={item.id}
-              className="relative flex items-center gap-4 mb-4  p-4 border-b-2 border-gray-200"
-            >
-              <input type="checkbox" className="form-checkbox h-5 w-5" />
-              {/* image count */}
-              <div className="flex gap-6">
-                {/* image */}
-                <div className="flex-1 bg-[#E6FDE0] w-32 h-32 p-2">
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    className=" rounded-lg"
-                  />
-                </div>
-                {/* price count */}
-                <div className="flex-1  flex items-start sm:gap-32 flex-col w-full sm:flex-row ">
-                  {/* name price */}
-                  <div className="text-lg flex flex-col ">
-                    <span className="font-bold">{item.name}</span>
-                    <span className="text-[#1DA934] font-bold">
-                      ₦{item.price}
-                    </span>
-                  </div>
-                  {/* buttons count */}
-                  <div className="flex items-center sm:min-w-32 justify-between rounded-lg border border-gray-400 ">
-                    <button
-                      onClick={() => decrementItem(item.id)}
-                      className=" p-2 "
-                    >
-                      -
-                    </button>
-                    <span className="px-4">{item.quantity}</span>
-                    <button onClick={() => addItem(item)} className=" p-2 ">
-                      +
-                    </button>
-                  </div>
-                </div>
-              </div>
-              <button
-                onClick={() => removeItem(item.id)}
-                className=" absolute top-0 right-0"
+          {Object.values(items).map((item) => {
+            const product = getProductDetails(item.id);
+            if (!product) return null; // Skip if product details are not found
+
+            const imageUrl =
+              product && product.photos && product.photos.length > 0
+                ? `https://api.timbu.cloud/images/${product.photos[0].url}`
+                : "path_to_default_image.jpg"; // Provide a default image if not available
+
+            return (
+              <div
+                key={item.id}
+                className="relative flex items-center gap-4 mb-4  p-4 border-b-2 border-gray-200"
               >
-                ✕
-              </button>
-            </div>
-          ))}
+                <input type="checkbox" className="form-checkbox h-5 w-5" />
+                <div className="flex gap-6">
+                  <div className="flex-1 bg-[#E6FDE0] w-32 h-32 p-2">
+                    <img
+                      src={imageUrl}
+                      alt={product.name}
+                      className=" rounded-lg"
+                    />
+                  </div>
+                  <div className="flex-1  flex items-start sm:gap-32 flex-col w-full sm:flex-row ">
+                    <div className="text-lg flex flex-col ">
+                      <span className="font-bold">{product.name}</span>
+                      <span className="text-[#1DA934] font-bold">
+                        ₦{product.current_price[0]["NGN"][0]}
+                      </span>
+                    </div>
+                    <div className="flex items-center sm:min-w-32 justify-between rounded-lg border border-gray-400 ">
+                      <button
+                        onClick={() => decrementItem(item.id)}
+                        className=" p-2 "
+                      >
+                        -
+                      </button>
+                      <span className="px-4">{item.quantity}</span>
+                      <button onClick={() => addItem(item)} className=" p-2 ">
+                        +
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <button
+                  onClick={() => removeItem(item.id)}
+                  className=" absolute top-0 right-0"
+                >
+                  ✕
+                </button>
+              </div>
+            );
+          })}
         </div>
         <div className="w-full lg:w-80 p-4 bg-gray-100 shadow-md rounded-lg">
           <h4 className="text-xl font-bold">Order Summary</h4>
